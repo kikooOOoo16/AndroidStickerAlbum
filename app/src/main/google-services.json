@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "215541482739",
+    "firebase_url": "https://sticker-album-app.firebaseio.com",
+    "project_id": "sticker-album-app",
+    "storage_bucket": "sticker-album-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:215541482739:android:3845b26ee82ff231",
+        "android_client_info": {
+          "package_name": "com.example.neshh.androidstickeralbum"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "215541482739-ukthv3b2qu4e6cf694gujq573rn1d2o2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.neshh.androidstickeralbum",
+            "certificate_hash": "71cf36be27cc7ea6683dc5a6d3295f3b1d44ce81"
+          }
+        },
+        {
+          "client_id": "215541482739-c1ml5t8nsnkhc49aglqhlfvigpcubtjc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_TP7rICQw_pdb1UcKzSSe5swn_MHUkO4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "215541482739-c1ml5t8nsnkhc49aglqhlfvigpcubtjc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

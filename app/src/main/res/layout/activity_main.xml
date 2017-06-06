@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.neshh.androidstickeralbum.MainActivity">
+
+    <TextView
+        android:id="@+id/textViewUserEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="userMail"
+        android:textSize="45px"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/buttonLogout"
+        android:layout_margin="20dp"/>
+
+    <Button
+        android:id="@+id/buttonLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:background="#728499"
+        android:textColor="#FFFFFF"
+        android:text="Logout"
+        android:textSize="12dp"
+        android:layout_margin="2dp" />
+
+    <LinearLayout
+        android:id="@+id/imageLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/menuesLayout"
+        android:layout_below="@+id/textViewUserEmail"
+
+        >
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_weight = "2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/fifa_worldcup"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/menuesLayout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="0dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:background="#6ec261"
+        android:weightSum="43">
+
+        <Space
+            android:id="@+id/space1"
+            android:layout_width="344dp"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="-100dp" />
+
+        <Button
+            android:id="@+id/addNewStickerButton"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="7"
+            android:layout_gravity="center_horizontal"
+            android:background="#728499"
+            android:text="Додади нови сликички"
+            android:textColor="#FFFFFF"
+            android:textSize="30px" />
+
+        <Space
+            android:id="@+id/space2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"/>
+        <Button
+            android:id="@+id/myStickersButton"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="center_horizontal"
+            android:text="МОИ СЛИКИЧКИ"
+            android:textColor="#FFFFFF"
+            android:textSize="30px"
+            android:background="#728499"
+            android:layout_weight="7"/>
+        <Space
+            android:id="@+id/space3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"/>
+        <Button
+            android:id="@+id/editStickersButton"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="center_horizontal"
+            android:text="Ажурирање на сликички"
+            android:textColor="#FFFFFF"
+            android:textSize="30px"
+            android:background="#728499"
+            android:layout_weight="7"/>
+        <Space
+            android:id="@+id/space4"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"/>
+        <Button
+            android:id="@+id/tradableStickersButton"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="center_horizontal"
+            android:text="Сликички за разменување"
+            android:textColor="#FFFFFF"
+            android:textSize="30px"
+            android:background="#728499"
+            android:layout_weight="7"/>
+        <Space
+            android:id="@+id/space5"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
+

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/addStickerForm"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="320dp">
+        <TextView
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:id="@+id/vnesiDrzava"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Избери држава :"/>
+        <Spinner
+            android:id="@+id/spinnerDrzavi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignRight="@+id/vnesiDrzava"
+            android:entries="@array/countries"/>
+        <TextView
+            android:id="@+id/vnesiImeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/vnesiDrzava"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Внеси име"/>
+
+        <EditText
+            android:id="@+id/playerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/vnesiImeText"
+            android:layout_below="@+id/spinnerDrzavi"
+            android:layout_marginLeft="20dp"/>
+        <TextView
+            android:id="@+id/vnesiPrezimeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/vnesiImeText"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="27dp"
+            android:text="Внеси презиме"/>
+        <EditText
+            android:id="@+id/playerSurname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/vnesiPrezimeText"
+            android:layout_below="@+id/playerName"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:id="@+id/vnesiBrojText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/vnesiPrezimeText"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="29dp"
+            android:text="Внеси го бројот на сличето"/>
+        <EditText
+            android:id="@+id/stickerID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/vnesiBrojText"
+            android:layout_below="@+id/playerSurname"
+            android:layout_marginLeft="20dp"/>
+        <Button
+            android:id="@+id/takeStickerPicture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/vnesiBrojText"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:padding="10dp"
+            android:text="Сликај го сличето"
+            android:textColor="#FFFFFF"
+            android:background="#728499"/>
+
+        <ImageView
+            android:id="@+id/stickerImage"
+            android:src="@drawable/camera"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/stickerID"
+            android:layout_toRightOf="@+id/takeStickerPicture"/>
+        <Button
+            android:id="@+id/addStickerButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/takeStickerPicture"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:padding="14dp"
+            android:text="Внеси го сличето"
+            android:textColor="#FFFFFF"
+            android:background="#728499"/>
+
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_below="@+id/addStickerForm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:src="@drawable/fifalogo"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>
+

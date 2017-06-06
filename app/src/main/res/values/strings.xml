@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">AndroidStickerAlbum</string>
+    <string-array name="countries">
+        <item>England</item>
+        <item>Argentina</item>
+        <item>Spain</item>
+        <item>Russia</item>
+        <item>Croatia</item>
+        <item>Serbia</item>
+        <item>Portugal</item>
+    </string-array>
+
+    <string-array name="isTradable">
+        <item>false</item>
+        <item>true</item>
+    </string-array>
+
+</resources>

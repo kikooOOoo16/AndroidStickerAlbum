@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/tradableStickerImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_margin="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true" />
+    <TextView
+        android:id="@+id/tradablePlayerName"
+        android:textColor="#000000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:text="Ime na igrac"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/tradableStickerImage"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="30dp" />
+
+    <TextView
+        android:id="@+id/tradablePlayerSurname"
+        android:textColor="#000000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:text="prezime na igrac"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/tradablePlayerName"
+        android:paddingLeft="10dp"
+        android:layout_marginTop="30dp" />
+
+    <TextView
+        android:id="@+id/tradablePlayerCountry"
+        android:textColor="#000000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Nacionalnost"
+        android:layout_below="@+id/tradablePlayerName"
+        android:layout_toRightOf="@+id/tradableStickerImage" />
+    <TextView
+        android:id="@+id/tradableStickerNumber"
+        android:layout_marginTop="30dp"
+        android:paddingLeft="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/tradablePlayerSurname"
+        android:textColor="#000000"
+        android:text="Broj na stiker"
+        />
+    <TextView
+        android:id="@+id/tradableEmailOwner"
+        android:textColor="#000000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="30dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Owned by : email"
+        android:layout_below="@+id/tradablePlayerSurname"
+        android:layout_toRightOf="@+id/tradablePlayerCountry" />
+
+</RelativeLayout>
