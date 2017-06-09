@@ -49,16 +49,15 @@ public class AddStickerActivity extends AppCompatActivity {
 
     private List<Sticker> stickers;
     private Spinner nacionalnostSpinner = null;
-    private Button takeStickerPicture = null;
+    private Button takeStickerPictureButton = null;
     private Button addNewStickerButton = null;
-    private EditText imeIgrac = null;
-    private EditText prezimeIgrac = null;
-    private EditText brojNaSlice = null;
-    private ImageView stickerPicture = null;
-    private Bitmap mSavedImage = null;
+    private EditText imeIgracTextBox = null;
+    private EditText prezimeIgracTextBox = null;
+    private EditText brojNaSliceTextBox = null;
+    private EditText imageDownloadLinkTextBox = null;
+    private ImageView stickerPictureImageView = null;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseStickers;
-    private DatabaseReference databaseStickerImageUrls;
     private StorageReference mStorage;
     private ProgressDialog mProgressDialog;
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -73,20 +72,20 @@ public class AddStickerActivity extends AppCompatActivity {
         setContentView(R.layout.add_stickers);
 
         nacionalnostSpinner = (Spinner) findViewById(R.id.spinnerDrzavi);
-        imeIgrac = (EditText) findViewById(R.id.playerName);
-        prezimeIgrac = (EditText) findViewById(R.id.playerSurname);
-        brojNaSlice = (EditText) findViewById(R.id.stickerID);
+        imageDownloadLinkTextBox = (EditText)  findViewById(R.id.imageDownloadLink);
+        imeIgracTextBox = (EditText) findViewById(R.id.playerName);
+        prezimeIgracTextBox = (EditText) findViewById(R.id.playerSurname);
+        brojNaSliceTextBox = (EditText) findViewById(R.id.stickerID);
         addNewStickerButton = (Button) findViewById(R.id.addStickerButton);
-        takeStickerPicture = (Button) findViewById(R.id.takeStickerPicture);
-        stickerPicture = (ImageView) findViewById(R.id.stickerImage);
+        takeStickerPictureButton = (Button) findViewById(R.id.takeStickerPicture);
+        stickerPictureImageView = (ImageView) findViewById(R.id.stickerImage);
 
-        databaseStickerImageUrls = FirebaseDatabase.getInstance().getReference("stickerUrls");
         databaseStickers = FirebaseDatabase.getInstance().getReference("stickers");
         stickers = new ArrayList<>();
         firebaseAuth = FirebaseAuth.getInstance();
         mProgressDialog = new ProgressDialog(this);
 
-        takeStickerPicture.setOnClickListener(new View.OnClickListener() {
+        takeStickerPictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dispatchTakePictureIntent();
@@ -111,24 +110,18 @@ public class AddStickerActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        TextView newImeIgrac = (TextView) findViewById(R.id.playerName);
-
-
          if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
 
              //get the camera image
-             Bundle extras = data.getExtras();
              Bitmap imageBitmap = (Bitmap) data.getExtras().get("data");
              ByteArrayOutputStream baos = new ByteArrayOutputStream();
              imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
              byte[] databaos = baos.toByteArray();
 
-             stickerPicture.setImageBitmap(imageBitmap);
-             setmSavedImage(imageBitmap);
+             stickerPictureImageView.setImageBitmap(imageBitmap);
 
              mStorage = FirebaseStorage.getInstance().getReference();
-
-             StorageReference imagesRef = mStorage.child(newImeIgrac.getText().toString().trim());
+             StorageReference imagesRef = mStorage.child(imeIgracTextBox.getText().toString().trim());
 
              mProgressDialog.setMessage("Uploading image ...");
              mProgressDialog.show();
@@ -142,14 +135,9 @@ public class AddStickerActivity extends AppCompatActivity {
              }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                  @Override
                  public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                //    stickerDownloadUrl = taskSnapshot.getDownloadUrl().toString();
                      mProgressDialog.dismiss();
                      @SuppressWarnings("VisibleForTests") Uri downloadUrl = taskSnapshot.getDownloadUrl();
-
-                     String imeIgracText = imeIgrac.getText().toString().trim();
-                     String id = databaseStickerImageUrls.push().getKey();
-                     StickerUrl stickerUrl = new StickerUrl(id, downloadUrl.toString(), imeIgracText);
-                     databaseStickerImageUrls.child(id).setValue(stickerUrl);
+                     imageDownloadLinkTextBox.setText(downloadUrl.toString());
                  }
              } );
          }
@@ -160,16 +148,21 @@ public class AddStickerActivity extends AppCompatActivity {
     private Integer addNewSticker() {
 
             String nacionalnostString = nacionalnostSpinner.getSelectedItem().toString();
-            String imeIgracString = imeIgrac.getText().toString().trim();
-            String prezimeIgracString = prezimeIgrac.getText().toString().trim();
-            String brojNaSliceString = brojNaSlice.getText().toString().trim();
+            String imeIgracString = imeIgracTextBox.getText().toString().trim();
+            String prezimeIgracString = prezimeIgracTextBox.getText().toString().trim();
+            String brojNaSliceString = brojNaSliceTextBox.getText().toString().trim();
             Boolean isTradable = false;
-            Bitmap savedStickerImage;
+//            Bitmap savedStickerImage;
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        savedStickerImage = getmSavedImage();
+//        savedStickerImage = getmSavedImage();
 
-            if (savedStickerImage != null || !TextUtils.isEmpty(imeIgracString) || !TextUtils.isEmpty(prezimeIgracString) || !TextUtils.isEmpty(brojNaSliceString) ) {
+        if (imageDownloadLinkTextBox.getText() != null) {
+            defaultImageUrl = "";
+            defaultImageUrl = imageDownloadLinkTextBox.getText().toString();
+        }
+
+            if (/*savedStickerImage != null || */!TextUtils.isEmpty(imeIgracString) || !TextUtils.isEmpty(prezimeIgracString) || !TextUtils.isEmpty(brojNaSliceString) ) {
 
                 String id = databaseStickers.push().getKey();
                 Sticker newSticker = new Sticker(id, nacionalnostString, imeIgracString, prezimeIgracString, brojNaSliceString, isTradable, String.valueOf(user.getEmail()), defaultImageUrl);
@@ -192,13 +185,13 @@ public class AddStickerActivity extends AppCompatActivity {
 //         }
     }
 
-    public Bitmap getmSavedImage() {
-        return mSavedImage;
-    }
-
-    public void setmSavedImage(Bitmap mSavedImage) {
-        this.mSavedImage = mSavedImage;
-    }
+//    public Bitmap getmSavedImage() {
+//        return mSavedImage;
+//    }
+//
+//    public void setmSavedImage(Bitmap mSavedImage) {
+//        this.mSavedImage = mSavedImage;
+//    }
 }
 
 

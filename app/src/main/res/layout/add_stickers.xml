@@ -83,14 +83,13 @@
             android:id="@+id/takeStickerPicture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/vnesiBrojText"
-            android:layout_alignParentLeft="true"
-            android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp"
             android:padding="10dp"
             android:text="Сликај го сличето"
             android:textColor="#FFFFFF"
-            android:background="#728499"/>
+            android:background="#728499"
+            android:layout_alignBottom="@+id/stickerImage"
+            android:layout_alignStart="@+id/vnesiBrojText" />
 
         <ImageView
             android:id="@+id/stickerImage"
@@ -100,6 +99,17 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/stickerID"
             android:layout_toRightOf="@+id/takeStickerPicture"/>
+
+        <EditText
+            android:id="@+id/imageDownloadLink"
+            android:layout_width="wrap_content"
+            android:text="download link"
+            android:textSize="13sp"
+            android:textColor="#000000"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/takeStickerPicture"
+            android:visibility="invisible"/>
+
         <Button
             android:id="@+id/addStickerButton"
             android:layout_width="wrap_content"
@@ -113,14 +123,14 @@
             android:background="#728499"/>
 
 
-    </RelativeLayout>
+</RelativeLayout>
 
-    <ImageView
-        android:layout_below="@+id/addStickerForm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:src="@drawable/fifalogo"
-        android:layout_alignParentBottom="true"/>
+<ImageView
+    android:layout_below="@+id/addStickerForm"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:src="@drawable/fifalogo"
+    android:layout_alignParentBottom="true"/>
 </RelativeLayout>
 

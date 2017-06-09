@@ -27,9 +27,7 @@ import static android.R.id.list;
 public class ViewStickersActivity extends AppCompatActivity {
 
     private List<Sticker> stickers;
-    private List<StickerUrl> stickerImageUrls;
     private DatabaseReference databaseStickers;
-    private DatabaseReference databaseStickerImageUrls;
     private ListView listViewStickers;
     private String dataEmail;
     private String userEmail;
@@ -46,35 +44,13 @@ public class ViewStickersActivity extends AppCompatActivity {
 
         listViewStickers = (ListView) findViewById(R.id.stickerListView);
         databaseStickers = FirebaseDatabase.getInstance().getReference("stickers");
-        databaseStickerImageUrls = FirebaseDatabase.getInstance().getReference("stickerUrls");
         stickers = new ArrayList<>();
-        stickerImageUrls = new ArrayList<>();
 
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
-        databaseStickerImageUrls.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                stickerImageUrls.clear();
-
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-
-                    StickerUrl stickerImageUrlss = postSnapshot.getValue(StickerUrl.class);
-                    stickerImageUrls.add(stickerImageUrlss);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
 
         //attaching value event listener
         databaseStickers.addValueEventListener(new ValueEventListener() {
@@ -89,15 +65,14 @@ public class ViewStickersActivity extends AppCompatActivity {
 
                 //getting sticker
                 Sticker sticker = postSnapshot.getValue(Sticker.class);
-                StickerUrl stickerImageUrlsObject = new StickerUrl();
+
 
                 dataEmail = sticker.getmUserEmail();
                 userEmail = user.getEmail();
 
-                if (dataEmail.equals(userEmail) /*&& stickerImageUrlsObject.getmStickerPlayerName().equals(sticker.getMimeNaIgrac())*/) {
+                if (dataEmail.equals(userEmail)) {
                     //adding sticker to the list
-                    String url = stickerImageUrlsObject.getmStickerUrl();
-                    sticker.setmStickerImageUrl(defaultImageUrl);
+                    sticker.setmStickerImageUrl(sticker.getmStickerImageUrl());
                     stickers.add(sticker);
                 }
                 else {
