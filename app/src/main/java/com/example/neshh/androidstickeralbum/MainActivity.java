@@ -11,14 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-
-import static com.example.neshh.androidstickeralbum.R.id.addStickerButton;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -37,48 +33,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //      initializing firebase auth object
         firebaseAuth = FirebaseAuth.getInstance();
 
-
-        if (getIntent().getExtras() != null) {
-            for (String key : getIntent().getExtras().keySet()) {
-                if (key.equals("true")) {
-                    //open trading stickers activity
-                }
-            }
-        }
-
-
-//      if getCurrentUser does not returns null
-
+//      if getCurrentUser does not return null
         if(firebaseAuth.getCurrentUser() != null){
 //      that means user is already logged in
 //      so close this activity
         finish();
-
 //      and open profile activity
         startActivity(new Intent(getApplicationContext(), MenuesActivity.class));
         }
 
-        //initializing views
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         textViewSignin = (TextView) findViewById(R.id.textViewSignin);
-
         buttonSignup = (Button) findViewById(R.id.buttonSignup);
-
         progressDialog = new ProgressDialog(this);
 
-        //attaching listener to button
         buttonSignup.setOnClickListener(this);
         textViewSignin.setOnClickListener(this);
     }
 
+    @Override
+    public void onClick(View view) {
+
+        if(view == buttonSignup){
+            registerUser();
+        }
+
+        if(view == textViewSignin){
+            startActivity(new Intent(this, LogInActivity.class));
+        }
+
+    }
+
     private void registerUser(){
 
-        //getting email and password from edit texts
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
-        //checking if email and passwords are empty
         if(TextUtils.isEmpty(email)){
             Toast.makeText(this,"Мора да внесете e-mail адреса",Toast.LENGTH_LONG).show();
             return;
@@ -88,9 +79,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this,"Мора да внесете лозинка",Toast.LENGTH_LONG).show();
             return;
         }
-
-        //if the email and password are not empty
-        //displaying a progress dialog
 
         progressDialog.setMessage("Најавување ве молиме почекајте ...");
         progressDialog.show();
@@ -105,7 +93,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             finish();
                             startActivity(new Intent(getApplicationContext(), MenuesActivity.class));
                         }else{
-                            //display some message here
                             Toast.makeText(MainActivity.this,"Registration Error",Toast.LENGTH_LONG).show();
                         }
                         progressDialog.dismiss();
@@ -113,19 +100,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 });
     }
 
-    @Override
-    public void onClick(View view) {
-
-        if(view == buttonSignup){
-            registerUser();
-        }
-
-        if(view == textViewSignin){
-            //open login activity when user taps on the already registered textview
-            startActivity(new Intent(this, LogInActivity.class));
-        }
-
-    }
 }
 
 

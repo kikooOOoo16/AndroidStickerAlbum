@@ -141,7 +141,6 @@ public class AddStickerActivity extends AppCompatActivity {
                  }
              } );
          }
-
     }
 
     //Adding new stickers to fireBase database
@@ -152,17 +151,15 @@ public class AddStickerActivity extends AppCompatActivity {
             String prezimeIgracString = prezimeIgracTextBox.getText().toString().trim();
             String brojNaSliceString = brojNaSliceTextBox.getText().toString().trim();
             Boolean isTradable = false;
-//            Bitmap savedStickerImage;
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
-//        savedStickerImage = getmSavedImage();
 
         if (imageDownloadLinkTextBox.getText() != null) {
             defaultImageUrl = "";
             defaultImageUrl = imageDownloadLinkTextBox.getText().toString();
         }
 
-            if (/*savedStickerImage != null || */!TextUtils.isEmpty(imeIgracString) || !TextUtils.isEmpty(prezimeIgracString) || !TextUtils.isEmpty(brojNaSliceString) ) {
+            if (!TextUtils.isEmpty(imeIgracString) || !TextUtils.isEmpty(prezimeIgracString) || !TextUtils.isEmpty(brojNaSliceString) ) {
 
                 String id = databaseStickers.push().getKey();
                 Sticker newSticker = new Sticker(id, nacionalnostString, imeIgracString, prezimeIgracString, brojNaSliceString, isTradable, String.valueOf(user.getEmail()), defaultImageUrl);
@@ -179,19 +176,9 @@ public class AddStickerActivity extends AppCompatActivity {
     private void dispatchTakePictureIntent() {
 
     Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-//         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
              startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-//         }
-    }
 
-//    public Bitmap getmSavedImage() {
-//        return mSavedImage;
-//    }
-//
-//    public void setmSavedImage(Bitmap mSavedImage) {
-//        this.mSavedImage = mSavedImage;
-//    }
+    }
 }
 
 

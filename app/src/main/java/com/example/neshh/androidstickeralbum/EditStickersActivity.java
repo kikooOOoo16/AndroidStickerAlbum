@@ -39,7 +39,6 @@ public class EditStickersActivity extends AppCompatActivity {
     private String userEmail;
     private String defaultImageUrl = "https://firebasestorage.googleapis.com/v0/b/sticker-album-app.appspot.com/o/missing_player.png?alt=media&token=80aeac52-4a40-42e0-98c7-608a05148372";
 
-
     private FirebaseAuth firebaseAuth;
 
         @Override
@@ -57,12 +56,10 @@ public class EditStickersActivity extends AppCompatActivity {
                 @Override
                 public boolean onItemLongClick (AdapterView< ? > adapterView, View view, int i, long l){
                     Sticker sticker = stickers.get(i);
-                    showUpdateDeleteDialog(sticker.getmId(), sticker.getMdrzavaZaKojaIgra(), sticker.getMimeNaIgrac(), sticker.getMprezimeNaIgrac(), sticker.getMbrojNaSlice(), sticker.getMisTradable());
+                    showUpdateDeleteDialog(sticker.getmId(), sticker.getMdrzavaZaKojaIgra(), sticker.getMimeNaIgrac(), sticker.getMprezimeNaIgrac(), sticker.getMbrojNaSlice(), sticker.getMisTradable(), sticker.getmStickerImageUrl());
                     return true;
                 }
             });
-
-
         }
 
     @Override
@@ -109,19 +106,7 @@ public class EditStickersActivity extends AppCompatActivity {
         });
     }
 
-    private boolean updateSticker(String id, String newDrzavaZaKojaIgra, String newImeNaIgrac, String newPrezimeNaIgrac, String newBrojNaSlice, Boolean isTradable, String userEmail) {
-
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        //getting the specified sticker reference
-        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("stickers").child(id);
-        //updating sticker
-        Sticker sticker = new Sticker(id, newDrzavaZaKojaIgra, newImeNaIgrac, newPrezimeNaIgrac, newBrojNaSlice ,isTradable, String.valueOf(user.getEmail()), defaultImageUrl);
-        dR.setValue(sticker);
-        Toast.makeText(getApplicationContext(), "Сличето е ажурирано", Toast.LENGTH_LONG).show();
-        return true;
-    }
-
-    private void showUpdateDeleteDialog(final String id, String newDrzavaZaKojaIgra, String newImeNaIgrac, String newPrezimeNaIgrac, String newBrojNaSlice, Boolean isTradable) {
+    private void showUpdateDeleteDialog(final String id, String newDrzavaZaKojaIgra, String newImeNaIgrac, String newPrezimeNaIgrac, String newBrojNaSlice, Boolean isTradable, final String imageDownloadUrl) {
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
@@ -152,7 +137,7 @@ public class EditStickersActivity extends AppCompatActivity {
                 String stickerId = editTextStickerNumber.getText().toString().trim();
                 String isTradable = spinnerIsTradable.getSelectedItem().toString();
                 if (!TextUtils.isEmpty(name) || !TextUtils.isEmpty(surname) || !TextUtils.isEmpty(country) || !TextUtils.isEmpty(stickerId) ) {
-                    updateSticker(id, country, name, surname,  stickerId, Boolean.valueOf(isTradable), String.valueOf(user.getEmail()));
+                    updateSticker(id, country, name, surname,  stickerId, Boolean.valueOf(isTradable), String.valueOf(user.getEmail()), imageDownloadUrl);
                     b.dismiss();
                 }
                 else {
@@ -168,6 +153,18 @@ public class EditStickersActivity extends AppCompatActivity {
                 b.dismiss();
             }
         });
+    }
+
+    private boolean updateSticker(String id, String newDrzavaZaKojaIgra, String newImeNaIgrac, String newPrezimeNaIgrac, String newBrojNaSlice, Boolean isTradable, String userEmail, String imageDownloadUrl) {
+
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        //getting the specified sticker reference
+        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("stickers").child(id);
+        //updating sticker
+        Sticker sticker = new Sticker(id, newDrzavaZaKojaIgra, newImeNaIgrac, newPrezimeNaIgrac, newBrojNaSlice ,isTradable, String.valueOf(user.getEmail()), imageDownloadUrl);
+        dR.setValue(sticker);
+        Toast.makeText(getApplicationContext(), "Сличето е ажурирано", Toast.LENGTH_LONG).show();
+        return true;
     }
 
     private boolean deleteSticker(String id) {

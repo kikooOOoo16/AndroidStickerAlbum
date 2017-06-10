@@ -83,13 +83,12 @@ public class ViewStickersActivity extends AppCompatActivity {
             StickerAdapter mStickerAdapter = new StickerAdapter(ViewStickersActivity.this, stickers);
             //attaching adapter to the list view
             listViewStickers.setAdapter(mStickerAdapter);
-
         }
 
         @Override
         public void onCancelled(DatabaseError databaseError) {
 
-            }
+        }
         });
     }
 }

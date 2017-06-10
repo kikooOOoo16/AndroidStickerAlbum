@@ -40,7 +40,7 @@ public class TradableStickersActivity extends AppCompatActivity {
     private String message;
 
     private FirebaseAuth firebaseAuth;
-    Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+//    Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

@@ -8,13 +8,12 @@
 
     <TextView
         android:text="Задржете на корисникот на кој сакате да му испратите понуда :"
-        android:textSize="25dp"
+        android:textSize="18sp"
         android:background="#6ec261"
         android:textColor="#ffffff"
         android:gravity="center_horizontal|center_vertical"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="5"/>
+        android:layout_height="wrap_content" />
 
     <ListView
         android:id="@+id/tradableStickerListView"
