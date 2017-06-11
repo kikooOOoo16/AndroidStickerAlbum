@@ -137,6 +137,7 @@ public class EditStickersActivity extends AppCompatActivity {
                 String stickerId = editTextStickerNumber.getText().toString().trim();
                 String isTradable = spinnerIsTradable.getSelectedItem().toString();
                 if (!TextUtils.isEmpty(name) || !TextUtils.isEmpty(surname) || !TextUtils.isEmpty(country) || !TextUtils.isEmpty(stickerId) ) {
+//                    Tuka notifikaciii pod uslov if(Boolean.valueOf(isTradable) == true) ako e to mozno hh  
                     updateSticker(id, country, name, surname,  stickerId, Boolean.valueOf(isTradable), String.valueOf(user.getEmail()), imageDownloadUrl);
                     b.dismiss();
                 }
