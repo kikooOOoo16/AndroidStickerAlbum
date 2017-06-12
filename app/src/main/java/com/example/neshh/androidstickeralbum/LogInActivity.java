@@ -47,50 +47,6 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     private ProgressDialog progressDialog;
     private FirebaseMessaging firebaseMessaging;
 
-    RequestQueue queue;
-    public void sendNotifications() {
-        try {
-            queue = Volley.newRequestQueue(LogInActivity.this);
-            JsonObject notificationData = new JsonObject();
-            notificationData.addProperty("body", "Нов стикер е додаден за размена");//so bilo
-            notificationData.addProperty("title", "Нов стикер за размена");//so bilo
-            notificationData.addProperty("sound", "off");//so bilo
-            notificationData.addProperty("priority", "high");//so bilo
-            JsonObject params = new JsonObject();
-            params.add ("notification", notificationData);
-            params.addProperty("to", "/topics/stickerTrade");//so bilo na mestoto na 'bla'
-            JsonObjectRequest req = new JsonObjectRequest("https://fcm.googleapis.com/fcm/send", new JSONObject(params.toString()),
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            try {
-                                Log.d("Response", response.toString(4));
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.d("Error: ", error.getMessage());
-                }
-            }) {
-                @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
-                    Map<String, String> params = new HashMap();
-                    params.put("Content-Type", "application/json");
-                    params.put("authorization", "key=" + "AAAAMi9GBPM:APA91bGnqv8FHU1_cYOvtDskM3S-ohf3hwxNP41pORqFUMoAHy_lJbS25Ne5UPDG9VorddKCYPr_W98kSLcKs88dwweAEgfuYR5o_CcYMeM_bg80vc3e7ImHxF1oJkzxp1g_PfiDRebq");
-                    return params;
-                }
-            };
-            queue.add(req);
-        } catch (Exception e) {
-            Log.d("Notification Error", e.getMessage());
-        }
-    }
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

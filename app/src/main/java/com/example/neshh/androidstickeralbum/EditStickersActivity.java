@@ -152,7 +152,10 @@ public class EditStickersActivity extends AppCompatActivity {
                 String stickerId = editTextStickerNumber.getText().toString().trim();
                 String isTradable = spinnerIsTradable.getSelectedItem().toString();
                 if (!TextUtils.isEmpty(name) || !TextUtils.isEmpty(surname) || !TextUtils.isEmpty(country) || !TextUtils.isEmpty(stickerId) ) {
-//                    Tuka notifikaciii pod uslov if(Boolean.valueOf(isTradable) == true) ako e to mozno hh
+//                    Send notification
+                    if(Boolean.valueOf(isTradable)) {
+                        sendNotifications(name, surname, String.valueOf(user.getEmail()));
+                    }
                     updateSticker(id, country, name, surname,  stickerId, Boolean.valueOf(isTradable), String.valueOf(user.getEmail()), imageDownloadUrl);
                     b.dismiss();
                 }
@@ -193,6 +196,49 @@ public class EditStickersActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "Сличето е избришано", Toast.LENGTH_LONG).show();
 
         return true;
+    }
+
+
+    RequestQueue queue;
+    public void sendNotifications(String stickerName, String stickerSurname, String userMail) {
+        try {
+            queue = Volley.newRequestQueue(EditStickersActivity.this);
+            JsonObject notificationData = new JsonObject();
+            notificationData.addProperty("body", "Стикерот " + stickerName + " " + stickerSurname +" е додаден за размена од корисникот " + userMail);
+            notificationData.addProperty("title", "TradableSticker");
+            notificationData.addProperty("sound", "default");
+            notificationData.addProperty("priority", "high");
+            JsonObject params = new JsonObject();
+            params.add ("notification", notificationData);
+            params.addProperty("to", "/topics/stickerTrade");
+            JsonObjectRequest req = new JsonObjectRequest("https://fcm.googleapis.com/fcm/send", new JSONObject(params.toString()),
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                Log.d("Response", response.toString(4));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.d("Error: ", error.getMessage());
+                }
+            }) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap();
+                    params.put("Content-Type", "application/json");
+                    params.put("authorization", "key=" + "AAAAMi9GBPM:APA91bGnqv8FHU1_cYOvtDskM3S-ohf3hwxNP41pORqFUMoAHy_lJbS25Ne5UPDG9VorddKCYPr_W98kSLcKs88dwweAEgfuYR5o_CcYMeM_bg80vc3e7ImHxF1oJkzxp1g_PfiDRebq");
+                    return params;
+                }
+            };
+            queue.add(req);
+        } catch (Exception e) {
+            Log.d("Notification Error", e.getMessage());
+        }
     }
 
 }

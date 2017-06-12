@@ -24,6 +24,7 @@ import java.util.Vector;
 
 public class Notifications extends FirebaseMessagingService {
 
+    public static String refreshedToken = FirebaseInstanceId.getInstance().getToken();
     private static final String TAG = "FCM Service";
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -53,7 +54,7 @@ public class Notifications extends FirebaseMessagingService {
     public void sendNotification(Vector<String> obj) {
 
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("UMacedonia", obj.get(2));
+        intent.putExtra("StickersTrade", obj.get(2));
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,

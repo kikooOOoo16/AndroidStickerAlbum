@@ -12,15 +12,15 @@ import  com.example.neshh.androidstickeralbum.Notifications;
  */
 
 public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
-    public static String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+
     private static final String TAG = "MyFirebaseIIDService";
 
     @Override
     public void onTokenRefresh() {
-        refreshedToken = FirebaseInstanceId.getInstance().getToken();
-        Log.d(TAG, "Refreshed token: " + refreshedToken);
+        Notifications.refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        Log.d(TAG, "Refreshed token: " + Notifications.refreshedToken);
 
-        sendRegistrationToServer(refreshedToken);
+        sendRegistrationToServer(Notifications.refreshedToken);
     }
 
     private void sendRegistrationToServer(String token) {
