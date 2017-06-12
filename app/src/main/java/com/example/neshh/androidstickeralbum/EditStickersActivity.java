@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,6 +16,12 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -22,15 +29,23 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.gson.JsonObject;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by neshH on 05-Jun-17.
  */
 
 public class EditStickersActivity extends AppCompatActivity {
+
 
     private List<Sticker> stickers;
     private DatabaseReference databaseStickers;
@@ -137,7 +152,7 @@ public class EditStickersActivity extends AppCompatActivity {
                 String stickerId = editTextStickerNumber.getText().toString().trim();
                 String isTradable = spinnerIsTradable.getSelectedItem().toString();
                 if (!TextUtils.isEmpty(name) || !TextUtils.isEmpty(surname) || !TextUtils.isEmpty(country) || !TextUtils.isEmpty(stickerId) ) {
-//                    Tuka notifikaciii pod uslov if(Boolean.valueOf(isTradable) == true) ako e to mozno hh  
+//                    Tuka notifikaciii pod uslov if(Boolean.valueOf(isTradable) == true) ako e to mozno hh
                     updateSticker(id, country, name, surname,  stickerId, Boolean.valueOf(isTradable), String.valueOf(user.getEmail()), imageDownloadUrl);
                     b.dismiss();
                 }
@@ -179,4 +194,5 @@ public class EditStickersActivity extends AppCompatActivity {
 
         return true;
     }
+
 }
